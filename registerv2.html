@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldio - register</title>
+    <style>
+        label{display: inline-block; width: 80px;}
+        input,select{width: 120px;}
+    </style>
+</head>
+<body>
+    <!-- Possible modification could be to choose type="mail" -->
+    <label>Email Adress:</label> <input type="text" id="Namebox"> <br> <br> 
+    <label>Username</label> <input type="text" id="Rollbox"> <br> <br>
+    <label>Password</label> <input type="password" id="Secbox"> <br> <br>
+    <label>Consent?</label> 
+    <select id="Genbox">
+        <option value="Yes">Yes</option>
+        <option value="No">No</option>
+    </select>
+
+    <hr>   
+    <button id="Regbtn">Register</button>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+          apiKey: "AIzaSyBZn2nXHlxognJbK4Y2XBfw1NHD33R4S0I",
+          authDomain: "fire9db-212af.firebaseapp.com",
+          projectId: "fire9db-212af",
+          storageBucket: "fire9db-212af.appspot.com",
+          messagingSenderId: "801620339114",
+          appId: "1:801620339114:web:bc50009cae72979c6423d3",
+          databaseURL: "https://fire9db-212af-default-rtdb.europe-west1.firebasedatabase.app"
+        };
+      
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+        
+        import {getDatabase, ref, set, get, child, update, remove}
+        from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+
+        const db = getDatabase();
+
+        //declaring variables for easier management
+        var namebox = document.getElementById("Namebox");
+        var rollbox = document.getElementById("Rollbox");
+        var secbox = document.getElementById("Secbox");
+        var genbox = document.getElementById("Genbox");
+
+        var regBtn = document.getElementById("Regbtn");
+        //register a user based on their input from the form input fields. Registrs, is tied to an event listener which activates on click of teh register button.
+        function Registr(){
+            set(ref(db, "MyUsers/"+rollbox.value),{
+                Email: namebox.value,
+                Username: rollbox.value,
+                Password: secbox.value,
+                Consent: genbox.value,
+                Highscore: 0,
+            })
+            .then(()=>{
+                alert("data stored sucessfully");
+                window.close();
+            })
+            .catch((error) => {
+                alert("unsucessful, error"+error);
+            });
+        }
+        regBtn.addEventListener('click', Registr);
+      </script>
+
+</body>
+</html>

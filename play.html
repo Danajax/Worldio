@@ -1,0 +1,272 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldio - play</title>
+    <link rel="stylesheet" href="./autocomplete.css">
+    <link rel="stylesheet" href="./navbar.css">
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        * {
+            margin: 0;
+        }
+
+        body {
+            background-image: url('') !important;
+        }
+
+        #main, #main2 {
+            margin-top: 5vh;
+            text-align: center !important;
+            height: 70vh;
+            width: 60vw;
+            text-align: center;
+            margin: auto;
+            padding: auto auto auto auto;
+        }
+
+        table {
+            text-align: center;
+            margin: auto;
+            padding: auto auto auto auto;
+        }
+
+        #score {
+            background-color: green;
+        }
+
+        #hints>table,
+        td {
+            border: 1px solid black;
+        }
+        img{
+            height: 40vh;
+            width: 40vw;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar-->
+    <div class="navbar" id="topnav">
+        <a href="index.html" class="individ">Worldoid</a>
+        <a href="signin.html" id="temporarysign">Sign in</a>
+        <a href="index.html">Help</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a class="aktivside" href="play.html">Play</a>
+        <a href="index.html">Home</a>
+        <a class="icon" onclick="hamwithburger()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    
+
+    <div id="main">
+        <!-- <div><span id="time">10:00</span> minutes!</div> -->
+        <!-- <p id="timer"></p> -->
+        <button id="Updscr">Oppdater Highscore</button> 
+        <!-- <button id="Startgame" onclick="startTimer(60*10, document.querySelector('#time'))">Start</button> -->
+        <div id="bildeavland"></div>
+        <!-- dette er DIVen for bildene ^ -->
+        <!-- Tabell for å motta input og for å vise score -->
+        <table>
+            <th>
+                <form autocomplete="off" class="pure-form" action="/action_page.php"></form>
+                <div class="autocomplete" style="width:300px;">
+                    <input id="myInput" type="text" name="myCountry" placeholder="Enter Country">
+                </div>
+                <input type="submit" onclick="checkForMatch();">
+                </form>
+            </th>
+            <th id="score"></th>
+        </table>
+        <!-- DIV for om input samsvarer med fasit -->
+        <br>
+        <div id="torf"></div>
+        <br>
+        <div id="hints">
+            <table id="header">
+                <tr>
+                    <th>Your guess</th>
+                    <th>Distance to target (km)</th>
+                </tr>
+                <div id="temp1">
+                    <tr>
+                        <td id="try20"></td>
+                        <td id="dis20"></td>
+                    </tr>
+                    <tr>
+                        <td id="try19"></td>
+                        <td id="dis19"></td>
+                    </tr>
+                    <tr>
+                        <td id="try18"></td>
+                        <td id="dis18"></td>
+                    </tr>
+                    <tr>
+                        <td id="try17"></td>
+                        <td id="dis17"></td>
+                    </tr>
+                    <tr>
+                        <td id="try16"></td>
+                        <td id="dis16"></td>
+                    </tr>
+                    <tr>
+                        <td id="try15"></td>
+                        <td id="dis15"></td>
+                    </tr>
+                    <tr>
+                        <td id="try14"></td>
+                        <td id="dis14"></td>
+                    </tr>
+                    <tr>
+                        <td id="try13"></td>
+                        <td id="dis13"></td>
+                    </tr>
+                    <tr>
+                        <td id="try12"></td>
+                        <td id="dis12"></td>
+                    </tr>
+                    <tr>
+                        <td id="try11"></td>
+                        <td id="dis11"></td>
+                    </tr>
+                    <tr>
+                        <td id="try10"></td>
+                        <td id="dis10"></td>
+                    </tr>
+                    <tr>
+                        <td id="try9"></td>
+                        <td id="dis9"></td>
+                    </tr>
+                    <tr>
+                        <td id="try8"></td>
+                        <td id="dis8"></td>
+                    </tr>
+                    <tr>
+                        <td id="try7"></td>
+                        <td id="dis7"></td>
+                    </tr>
+                    <tr>
+                        <td id="try6"></td>
+                        <td id="dis6"></td>
+                    </tr>
+                    <tr>
+                        <td id="try5"></td>
+                        <td id="dis5"></td>
+                    </tr>
+                    <tr>
+                        <td id="try4"></td>
+                        <td id="dis4"></td>
+                    </tr>
+                    <tr>
+                        <td id="try3"></td>
+                        <td id="dis3"></td>
+                    </tr>
+                    <tr>
+                        <td id="try3"></td>
+                        <td id="dis3"></td>
+                    </tr>
+                    <tr>
+                        <td id="try2"></td>
+                        <td id="dis2"></td>
+                    </tr>
+                    <tr>
+                        <td id="try1"></td>
+                        <td id="dis1"></td>
+
+                    </tr>
+                </div>
+            </table>
+        </div>
+        <p id="Prevscore"></p>
+    </div>
+    <div id="main2"></div>
+    
+    <script src="./scripts/gamelogicv2.js"></script>
+    <script src="./scripts/autocomplete.js"></script>
+    <script src="./scripts/responsive.js"></script>
+    <script src="./scripts/test.js"></script>
+    <script type="module">
+        autocomplete(document.getElementById("myInput"), countries);
+
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZn2nXHlxognJbK4Y2XBfw1NHD33R4S0I",
+            authDomain: "fire9db-212af.firebaseapp.com",
+            projectId: "fire9db-212af",
+            storageBucket: "fire9db-212af.appspot.com",
+            messagingSenderId: "801620339114",
+            appId: "1:801620339114:web:bc50009cae72979c6423d3",
+            databaseURL: "https://fire9db-212af-default-rtdb.europe-west1.firebasedatabase.app"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        //importing essential/common functions
+        import { getDatabase, ref, set, get, child, update, remove }
+            from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+
+        const db = getDatabase();
+
+        let highscoretest = parseInt(localStorage.getItem('GameScore'));
+        console.log(highscoretest);
+        document.getElementById('Prevscore').innerHTML = `Previous score: ${parseInt(localStorage.getItem('GameScore'))}`;
+        let updscr = document.getElementById('Updscr');
+
+        //function that should update highscore, with the one saved from local storage
+        function HighScoooore() {
+            update(ref(db, "MyUsers/" + user), {
+                Highscore: highscoretest,
+            })
+                .then(() => {
+                    alert("Highscore stored sucessfully");
+                })
+                .catch((error) => {
+                    alert("unsucessful, error" + error);
+                });
+        }
+        //checking if the local storage highscore is ≥ the value stored in my database
+        function checkforgreaterscore() {
+            const dbref = ref(db);
+
+            get(child(dbref, "MyUsers/" + user)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    if (highscoretest > snapshot.val().Highscore) {
+                        HighScoooore(); //calling the previous function 
+                    }
+                    else{
+                        console.log("Your highscore is too low")
+                    }
+                }
+                else{
+                    console.log("The snapshot does not exist")
+                }
+
+            }).catch((error) => {
+                alert("unnsuccesfull, error" + error);
+            })
+        }
+        //Running the checkforgreaterscorefunction based on user's act. Event listener is tied to the updatescore button 
+        updscr.addEventListener('click', checkforgreaterscore);
+        
+
+
+    </script>
+
+</body>
+
+</html>

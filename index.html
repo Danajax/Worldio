@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+       <meta charset="UTF-8">
+       <meta name="viewport" content="width=, initial-scale=1.0">
+       <title>Worldio</title>
+       <link rel="stylesheet" href="./style.css">
+       <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+       <!-- Navbar-->
+       <div class="navbar" id="topnav">
+              <a href="index.html" class="individ">Worldio</a>
+              <a href="signin.html" id="temporarysign">Sign in</a>
+              <a href="index.html">Help</a>
+              <a href="leaderboard.html">Leaderboard</a>
+              <a href="play.html">Play</a>
+              <a class="aktivside" href="index.html">Home</a>
+              <a class="icon" onclick="hamwithburger()">
+                     <i class="fa fa-bars"></i>
+              </a>
+       </div>
+
+       <!-- seperat div for main innholdet -->
+       <div id="home">
+              <h1 id="title1"> <u>Your game awaits!</u> </h1>
+              <div id="container">
+                     <div id="reg" onclick="window.open('./registerv2.html','popUpWindow','height=250,width=400,left=10,top=10,,scrollbars=yes,menubar=no'); return false;")>Register</div>
+                     <a id="pla" href="./play.html" target="_blank">Play now</a>
+                     
+              </div>
+       </div>
+       <br>
+       <br>
+       <div id="htp">
+              <h1>How to play</h1>
+              <p>Worldio is a guessing game, where knowlegde is beneficial but not essential. You get a total of 21 tries (20 hints) in order to name a total of 196 countries' shapes. An invinsible countdown of 10 minutes will commence once you land on the playing page. Make the most out of your time, have fun, compete (<i>registration and sign in required</i>) and learn! </p>
+              <p>Game is inspired by <a href="https://worldle.teuteuf.fr/">Wordle</a>, which is a great game. Particular code inspirations have been referred to in the according files. </p>
+       </div>
+
+       <script src="./scripts/responsive.js"></script>
+       <script>
+              console.log(sessionStorage.getItem('Status'))
+       </script>
+       <script src="./scripts/test.js"></script>
+</body>
+
+</html>

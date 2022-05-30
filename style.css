@@ -1,0 +1,107 @@
+body {
+    padding: 0;
+	margin: 0px;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+	background-color: azure;
+    background-image: url("./bilder/homepic.gif");
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    height: 70vh;
+}
+/* Navbar */
+.navbar{
+    background-color: lightblue;
+    overflow: hidden;
+    position: sticky;
+    top: 0 !important;
+}
+.innhold a {
+    float: none;
+    padding: 14px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+}
+.navbar .icon {
+  display: none;
+}
+.navbar a {
+    float: right;
+    color: black;
+    text-align: center;
+    padding: 14px 16px;
+    font-size: 17px;
+    text-decoration: none;
+}
+.navbar a:hover {
+    background-color: #333;
+    color: white;
+}
+.aktivside {
+    background-color: silver;
+    color: black !important;
+}
+.individ{
+    float: left !important;
+}
+
+/* main page*/
+#home{
+    font-family: 'Ubuntu', sans-serif ;
+    text-align: center;
+    width: 100%;
+    height: 70%;
+}
+#title{
+    text-decoration: underline;
+}
+#reg, #pla, #fpsw{
+    display: inline-block;
+    text-align: center;
+    border: 1px solid black;
+    border-radius: 4px;
+    padding: 1rem 1rem;
+    vertical-align: middle;
+    background-color: blue;
+    color: white;
+    text-decoration: none;
+}
+.icon{
+    display: none;
+}
+#htp{
+    text-align: center;
+    bottom: 5px !important;
+}
+
+/* Responsivhet */
+@media screen and (max-width:540px) {
+    .navbar a:not(:first-child) {display: none}
+    .navbar a.icon {
+      float: right;
+      display: block;
+    }
+  }
+  @media screen and (max-width:540px) {
+    .navbar.responsive {position: relative;}
+    .navbar.responsive a.icon {
+      position: absolute;
+      right: 0;
+      top: 0;
+    }
+    .navbar.responsive a{
+      float: none;
+      display: block;
+      text-align: left;
+    }
+    .individ{
+        /* padding-left: 43% !important;
+        padding-right: 50px !important; */
+        text-align: center !important;
+    }
+    a:hover{
+        background-color: lightblue !important;
+        color: black !important;
+    }
+  }

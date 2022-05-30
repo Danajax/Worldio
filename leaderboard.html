@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldio - leaderboard</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+       <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+       <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+       <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        table, th, td {
+            border: 1px solid black;
+            background-color: lightblue;
+            margin:auto;
+        }
+
+        body {
+            background-repeat: repeat-y;
+        }
+        .container{
+            margin: auto;
+            width: 70%;
+            text-align: center;
+            margin-top: 5vh;
+            font-size: 3vw;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar-->
+    <div class="navbar" id="topnav">
+        <a href="index.html" class="individ">Worldio</a>
+        <a href="signin.html" id="temporarysign">Sign in</a>
+        <a href="index.html">Help</a>
+        <a class="aktivside" href="leaderboard.html">Leaderboard</a>
+        <a href="play.html">Play</a>
+        <a href="index.html">Home</a>
+        <a class="icon" onclick="hamwithburger()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <div class="container">
+        <table class="table">
+            <thead>
+                <th>Place</th>
+                <th>Username</th>
+                <th>High Score</th>
+            </thead>
+            <tbody id="tbody1"></tbody>
+        </table>
+
+    </div>
+    <script src="./scripts/responsive.js"></script>
+    <script src="./scripts/test.js"></script>
+    <script type="module">
+       
+       var posNo = 0;
+        var tbody = document.getElementById('tbody1');
+        //function for adding general items to table
+        function additemtotable(user, score) {
+            let trow = document.createElement("tr");
+            let td1 = document.createElement('td');
+            let td2 = document.createElement('td');
+            let td3 = document.createElement('td');
+
+            td1.innerHTML = ++posNo;
+            td2.innerHTML = user;
+            td3.innerHTML = score;
+
+            trow.appendChild(td1);
+            trow.appendChild(td2);
+            trow.appendChild(td3);
+
+            tbody.appendChild(trow);
+        }
+
+        //function for adding database data to table 
+        function adddatatotable(UsernameX) {
+            UsernameX.reverse(); //orderByChild() sorts in order low to high, therefore had to reverse in line number 84
+            posNo = 0;
+            tbody.innerHTML = "";
+            UsernameX.forEach(element => {
+                additemtotable(element.Username, element.Highscore);
+            });
+        }
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZn2nXHlxognJbK4Y2XBfw1NHD33R4S0I",
+            authDomain: "fire9db-212af.firebaseapp.com",
+            projectId: "fire9db-212af",
+            storageBucket: "fire9db-212af.appspot.com",
+            messagingSenderId: "801620339114",
+            appId: "1:801620339114:web:bc50009cae72979c6423d3",
+            databaseURL: "https://fire9db-212af-default-rtdb.europe-west1.firebasedatabase.app"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        //importing essential/common functions, i choose to import all of these functions for testing purposes
+        import { getDatabase, onValue, ref, set, get, child, update, remove, query, limitToFirst, limitToLast, orderByChild, startAt, startAfter, endAt, equalTo }
+            from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+
+    
+        const db = getDatabase();
+        // let docs = snapshot.docs();
+
+        // console.log(firebase.database().dbref.orderByChild('Highscore'));
+        //function which gets our data, very compressed code due to the essential imports. 
+        function getdataonce() {
+            const que = query(ref(db, "MyUsers"), orderByChild("Highscore"));  //orderByChild() sorts in order low to high, therefore had to reverse in line number 84
+
+            get(que).then((snapshot) => {
+                var users = [];
+
+                snapshot.forEach(childSnapshot => {
+                    users.push(childSnapshot.val());
+                });
+                adddatatotable(users); //call our previous function with our data 
+            });
+
+        }
+        // function getdatall() {
+        //     const dbref = ref(db, "MyUsers");
+
+        //     onValue(dbref, (snapshot) => {
+        //         var users = [];
+
+        //         snapshot.forEach(childSnapshot => {
+        //             users.push(childSnapshot.val());
+        //         })
+        //         adddatatotable(users);
+        //     })
+        // }
+        window.onload = getdataonce;
+
+
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Worldio - sign in</title>
+    <link rel="stylesheet" href="./style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Ubuntu&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <style>
+        body {
+            background-image: url('./bilder/signin.jpeg');
+            background-size: cover;
+            background-repeat: repeat-y;
+        }
+
+        #signin {
+            margin: auto auto;
+            padding-top: 10px;
+            font-size: 20px;
+            text-align: center;
+            background-color: rgba(106, 56, 255, 0.482);
+            width: 42%;
+            border: 1px solid black;
+            border-radius: 5px;
+        }
+
+        #signinbtn {
+            border: rgba(106, 56, 255, 0.482);
+            background-color: white;
+            margin-bottom: 10px;
+            font-size: 18px;
+        }
+
+        #reg,
+        #fpsw {
+            padding: 10px 10px;
+        }
+
+        @media screen and (max-width:396px) {
+            #signin {
+                width: 60%;
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar-->
+    <div class="navbar" id="topnav">
+        <a href="index.html" class="individ">Worldio</a>
+        <a href="signin.html" class="aktivside" id="temporarysign">Sign in</a>
+        <a href="index.html">Help</a>
+        <a href="leaderboard.html">Leaderboard</a>
+        <a href="play.html">Play</a>
+        <a href="index.html">Home</a>
+        <a class="icon" onclick="hamwithburger()">
+            <i class="fa fa-bars"></i>
+        </a>
+    </div>
+    <br>
+    <div id="signin">
+        <h1 style="font-size: 25px;">Sign in</h1>
+
+        <label>Username:</label> <input type="text" id="Userbox"> <br> <br>
+        <label>Password:</label> <input type="password" id="Passbox"> <br> <br>
+        <button id="Signinbtn">Sign in</button> <br>
+
+
+        <div id="reg"
+            onclick="window.open('./registerv2.html','popUpWindow','height=250,width=400,left=10,top=10,,scrollbars=yes,menubar=no'); return false;"
+            )>Register now!</div>
+        <div id="fpsw"
+            onclick="window.open('./forgotpass.html','popUpWindow','height=250,width=400,left=10,top=10,,scrollbars=yes,menubar=no'); return false;"
+            )>Forgot password?</div>
+    </div>
+
+    <script type="module">
+        // Import the functions you need from the SDKs you need
+        import { initializeApp } from "https://www.gstatic.com/firebasejs/9.8.2/firebase-app.js";
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+
+        // Your web app's Firebase configuration
+        const firebaseConfig = {
+            apiKey: "AIzaSyBZn2nXHlxognJbK4Y2XBfw1NHD33R4S0I",
+            authDomain: "fire9db-212af.firebaseapp.com",
+            projectId: "fire9db-212af",
+            storageBucket: "fire9db-212af.appspot.com",
+            messagingSenderId: "801620339114",
+            appId: "1:801620339114:web:bc50009cae72979c6423d3",
+            databaseURL: "https://fire9db-212af-default-rtdb.europe-west1.firebasedatabase.app"
+        };
+
+        // Initialize Firebase
+        const app = initializeApp(firebaseConfig);
+
+        import { getDatabase, ref, set, get, child, update, remove }
+            from "https://www.gstatic.com/firebasejs/9.8.2/firebase-database.js";
+
+        const db = getDatabase();
+
+        var userbox = document.getElementById("Userbox"); //username
+        var passbox = document.getElementById("Passbox"); //pass
+
+        var signinbtn = document.getElementById("Signinbtn");
+        //function for what happens when credentials match
+        function grantaccess() {
+            window.location.href = "./profilepage.html"
+        }
+        //function for checking if username exists and if inputed password corresponds to password saved in the database
+        function checkpass() {
+            const dbref = ref(db);
+            //retrieving data from database and covering the different scenarios
+            get(child(dbref, "MyUsers/" + userbox.value)).then((snapshot) => {
+                if (snapshot.exists()) {
+                    if (passbox.value == snapshot.val().Password) {
+                        console.log("Your password is correct");
+                        grantaccess();
+                        sessionStorage.setItem('Status', 'Trues');
+                        sessionStorage.setItem('Username', userbox.value);
+                    }
+                    else {
+                        alert("Your password is incorrect!");
+                    }
+                } else {
+                    alert("Username does not exist!");
+                }
+            })
+                .catch((error) => {
+                    alert("unnsuccesfull, error" + error);
+                })
+        }
+        signinbtn.addEventListener('click', checkpass); //onclick of the button => we run checkpass()
+
+
+
+
+    </script>
+    <script src="./scripts/responsive.js"></script>
+</body>
+
+</html>
